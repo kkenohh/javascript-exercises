@@ -1,7 +1,7 @@
 const findTheage = function(arr) {
     function helper(person) {
-        if (!person.hasOwn('yearOfDeath')) {
-            let death = Date.getFullYear();
+        if (!person.hasOwnProperty('yearOfDeath')) {
+            let death = new Date().getFullYear();
         } else {
             death = person.yearOfDeath;
         }
@@ -10,7 +10,13 @@ const findTheage = function(arr) {
     }
     let age = 0;
     let oldest;
-    return arr.reduce(person => helper(person) > age);
+    arr.forEach(person => {
+        if (helper(person) > age) {
+            age = helper(person);
+            oldest = person;
+        }
+    });
+    return oldest;
 };
 
 // Do not edit below this line
